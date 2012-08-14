@@ -29,6 +29,9 @@ public class Formulario {
 	}
 	
 	// Grabar en base de datos (se debe implementar en cada herencia)
+	public void grabar(int p_id) {
+	}
+	
 	public void grabar() {
 	}
 /*	
@@ -93,9 +96,8 @@ public class Formulario {
 	}
 	
 	private void clearValues() {
-		for (String v : this.columnasValor) {
-			v = "";
-		}
+		for (int i = 0; i < this.columnasValor.size(); i++)
+			this.columnasValor.set(i, null);
 	}
 	
 	public void nuevo() {
@@ -106,29 +108,33 @@ public class Formulario {
 		// Editar las columnas sin valores (nuevo registro)
 		this.editar(true);
 		this.grabar();
+		this.clearValues();
 	}
 	
-	public void modificar() {
+	public void modificar(int p_id) {
 		this.modo = this.MODIFICAR;
 		this.columnaActual = 0;
 		// Editar las columnas con valores (modificar registro)
 		this.editar(true);
-		this.grabar();
+		this.grabar(p_id);
+		this.clearValues();
 	}
 	
-	public void eliminar() {
+	public void eliminar(int p_id) {
 		this.modo = this.ELIMINAR;
 		this.columnaActual = 0;
 		// Mostrar las columnas del registro a eliminar
-		this.editar(false);
+		//this.editar(false);
+		this.clearValues();
 	}
 
 	public void consultar() {
 		this.modo = this.CONSULTAR;
 		this.columnaActual = 0;
 		// Limpiar datos de formulario
-		this.clearValues();
+		//this.clearValues();
 		// Editar las columnas para usar como filtro
+		this.clearValues();
 		this.editar(true);
 	}
 
